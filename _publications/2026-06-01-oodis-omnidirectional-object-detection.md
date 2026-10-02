@@ -2,7 +2,7 @@
 title: "OODIS: Omnidirectional Object Detection for Industrial Safety"
 collection: publications
 category: conferences
-badge: 'Domestic Conference'
+badge: 'Conference'
 permalink: /publication/2026-06-01-oodis-omnidirectional-object-detection
 date: 2026-06-01
 venue: 'Korea Robotics Society (KROS) Conference'
