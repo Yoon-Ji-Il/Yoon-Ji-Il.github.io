@@ -57,7 +57,7 @@ html[data-theme="dark"] .cv-venue { color: #93c5fd; }
 ## Research Experience
 
 <div class="cv-item">
-<div class="cv-head"><span class="cv-title">Forklift Safety System Project (with CJ)</span><span class="cv-date">2025.08 – Present</span></div>
+<div class="cv-head"><span class="cv-title">Forklift Safety System Project (with CJ)</span><span class="cv-date">2025.06 – 2025.12</span></div>
 <div class="cv-sub">SPARO Lab, Inha University</div>
 <div class="cv-desc">Fused data from a 360° camera (Ricoh Theta) and a LiDAR (Mid-360) to detect people around forklifts and prevent safety accidents in a CJ factory.</div>
 </div>
