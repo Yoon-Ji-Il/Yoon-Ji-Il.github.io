@@ -5,32 +5,106 @@ permalink: /publications/
 author_profile: true
 ---
 
-{% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
-{% endif %}
-
 {% include base_path %}
 
-<!-- New style rendering if publication categories are defined -->
-{% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
-        {% continue %}
-      {% endif %}
-      {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
-        {% assign title_shown = true %}
-      {% endunless %}
-      {% include archive-single.html %}
-    {% endfor %}
-  {% endfor %}
-{% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
-  {% endfor %}
+<style>
+  .pub-list { margin-top: 1.5em; }
+  .pub-card {
+    background: #f3f4f8;
+    border-radius: 12px;
+    padding: 1.3em 1.5em 1.4em;
+    margin-bottom: 1.2em;
+  }
+  .pub-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1em;
+  }
+  .pub-title {
+    font-size: 1.05em;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #1f2937;
+  }
+  .pub-title a { color: inherit; text-decoration: none; }
+  .pub-title a:hover { color: #1d4ed8; }
+  .pub-badge {
+    flex-shrink: 0;
+    white-space: nowrap;
+    background: #3b82f6;
+    color: #fff;
+    font-size: 0.72em;
+    font-weight: 600;
+    padding: 0.3em 0.9em;
+    border-radius: 999px;
+  }
+  .pub-authors {
+    margin-top: 0.6em;
+    font-size: 0.88em;
+    color: #4b5563;
+  }
+  .pub-venue {
+    margin-top: 0.8em;
+    font-size: 0.9em;
+    font-weight: 700;
+    color: #1d4ed8;
+  }
+  .pub-tags { margin-top: 0.8em; display: flex; flex-wrap: wrap; gap: 0.5em; }
+  .pub-tag {
+    background: #dbeafe;
+    color: #1d4ed8;
+    font-size: 0.75em;
+    padding: 0.35em 0.9em;
+    border-radius: 8px;
+  }
+  .pub-note { font-size: 0.8em; color: #6b7280; }
+
+  html[data-theme="dark"] .pub-card { background: #3d3f44; }
+  html[data-theme="dark"] .pub-title { color: #f3f4f6; }
+  html[data-theme="dark"] .pub-authors { color: #d1d5db; }
+  html[data-theme="dark"] .pub-venue,
+  html[data-theme="dark"] .pub-title a:hover { color: #93c5fd; }
+  html[data-theme="dark"] .pub-tag { background: #1e3a5f; color: #bfdbfe; }
+  html[data-theme="dark"] .pub-note { color: #d1d5db; }
+
+  @media (max-width: 600px) {
+    .pub-head { flex-direction: column-reverse; gap: 0.6em; }
+  }
+</style>
+
+{% if site.author.googlescholar %}
+  <div class="wordwrap">You can also find my articles on <a href="{{ site.author.googlescholar }}">my Google Scholar profile</a>.</div>
 {% endif %}
 
+{% assign pubs = site.publications | sort: "date" | reverse %}
+<div class="pub-list">
+{% for post in pubs %}
+  {% if post.badge %}
+    {% assign badge = post.badge %}
+  {% elsif post.category == "manuscripts" %}
+    {% assign badge = "Journal" %}
+  {% elsif post.category == "books" %}
+    {% assign badge = "Book" %}
+  {% else %}
+    {% assign badge = "Conference" %}
+  {% endif %}
+  <div class="pub-card">
+    <div class="pub-head">
+      <div class="pub-title">
+        {% if post.paperurl %}<a href="{{ post.paperurl }}">{{ post.title }}</a>{% else %}{{ post.title }}{% endif %}
+      </div>
+      <span class="pub-badge">{{ badge }}</span>
+    </div>
+    {% if post.authors %}<div class="pub-authors">{{ post.authors }}</div>{% endif %}
+    <div class="pub-venue">{{ post.venue_short | default: post.venue }} ({{ post.date | date: "%Y" }})</div>
+    {% if post.keywords %}
+    <div class="pub-tags">
+      {% for keyword in post.keywords %}<span class="pub-tag">{{ keyword }}</span>{% endfor %}
+    </div>
+    {% endif %}
+  </div>
+{% endfor %}
+</div>
 
-
+<p class="pub-note">* Equal contribution &nbsp;&nbsp; † Corresponding author</p>
