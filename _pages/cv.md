@@ -82,8 +82,3 @@ html[data-theme="dark"] .cv-venue { color: #93c5fd; }
 <div class="cv-desc">Completed a one-year educational volunteer program run by Samsung.</div>
 </div>
 
-## Skills
-
-<div class="cv-skill"><b>Programming</b>Python, C/C++, Verilog</div>
-<div class="cv-skill"><b>Robotics &amp; Tools</b>ROS 1/2, Docker</div>
-<div class="cv-skill"><b>Hardware</b>FPGA (Zybo, UltraScale)</div>
